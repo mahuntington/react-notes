@@ -1,5 +1,3 @@
-![In Rhythm](logo.gif)
-
 # Integrate Comments Component With Redux
 
 ## Lesson Objectives

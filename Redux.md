@@ -1,5 +1,3 @@
-![In Rhythm](logo.gif)
-
 # Intro to Redux
 
 ## Lesson Objectives

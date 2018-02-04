@@ -1,5 +1,3 @@
-![In Rhythm](logo.gif)
-
 # ES6 - The Future Is Now! (Sort of)
 
 ## Lesson Objectives

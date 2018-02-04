@@ -1,5 +1,3 @@
-![In Rhythm](logo.gif)
-
 # Training Layout
 
 1. Day 1: [Intro To ES6](/ES6.md)
