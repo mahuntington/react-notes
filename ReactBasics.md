@@ -135,13 +135,13 @@ ReactDOM.render(
 JSX can be split onto multiple lines:
 
 ```JavaScript
-const formatLocation = function(location){
-    return location + "!!"
+const formatUser = function(user){
+    return user + "!!"
 }
-const location = "Matt";
+const user = "Matt";
 const myJSX =
     <section>
-        <h1>Hello, {formatLocation(location)}</h1>
+        <h1>Hello, {formatUser(user)}</h1>
         Welcome to the app
     </section>
 
