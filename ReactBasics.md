@@ -40,6 +40,8 @@ React is a front-end framework which is designed to make building a Single Page 
 
 ## Create a basic component
 
+### HTML
+
 Let's set up the HTML
 
 ```HTML
@@ -71,6 +73,8 @@ Let's talk about all those script tags
     - Babel is a transpiler that will translate ES6 code to ES5
     - it also handles turning JSX into regular JS
 
+### JS
+
 - Let's create a component which is just an H1 tag
 - We'll insert it into the `main` tag of our html
 
@@ -87,7 +91,7 @@ ReactDOM.render(
         - All other attributes should work normally
 - React mixes HTML with JavaScript (JSX)
     - Notice that the HTML does not have quotes or backticks around it
-
+use `python -m SimpleHTTPServer` to start a basic server
 ## Assign JSX to a variable
 
 JSX just renders into regular JavaScript, so we can assign it to variable:
@@ -100,6 +104,8 @@ ReactDOM.render(
   document.querySelector('main')
 );
 ```
+
+use `python -m SimpleHTTPServer` to start a basic server for our code
 
 ## Embed an expression into JSX
 
