@@ -65,9 +65,9 @@ Let's set up the HTML
     <head>
         <meta charset="utf-8">
         <title></title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.3.2/umd/react.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.3.2/umd/react-dom.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
         <script type="text/babel" src="js/app.js"></script>
     </head>
     <body>
@@ -261,7 +261,7 @@ What if we want to get at properties of the component?
 ```JavaScript
 class Heading extends React.Component {
     sayHello() {
-        console.log(this); //null?!?
+        console.log(this); //undefined?!?
     }
     render() {
         return <h1 onClick={this.sayHello}>Hello, {this.props.name}!</h1>;
