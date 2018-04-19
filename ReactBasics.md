@@ -40,23 +40,6 @@ React is a front-end framework which is designed to make building a Single Page 
 
 ## Create a basic component
 
-- Let's create a component which is just an H1 tag
-- We'll insert it into the `main` tag of our html
-
-```JavaScript
-ReactDOM.render(
-  <h1 className="foo">Hello, world!</h1>,
-  document.querySelector('main')
-);
-```
-
-- This code will find the main tag and render an `h1` tag inside of it
-    - **NOTE** we can't set class with the `class` attribute anymore
-        - We have to use className so it doesn't get confused
-        - All other attributes should work normally
-- React mixes HTML with JavaScript (JSX)
-    - Notice that the HTML does not have quotes or backticks around it
-
 Let's set up the HTML
 
 ```HTML
@@ -87,6 +70,23 @@ Let's talk about all those script tags
 - browser.min.js (babel-core)
     - Babel is a transpiler that will translate ES6 code to ES5
     - it also handles turning JSX into regular JS
+
+- Let's create a component which is just an H1 tag
+- We'll insert it into the `main` tag of our html
+
+```JavaScript
+ReactDOM.render(
+  <h1 className="foo">Hello, world!</h1>,
+  document.querySelector('main')
+);
+```
+
+- This code will find the main tag and render an `h1` tag inside of it
+    - **NOTE** we can't set class with the `class` attribute anymore
+        - We have to use className so it doesn't get confused
+        - All other attributes should work normally
+- React mixes HTML with JavaScript (JSX)
+    - Notice that the HTML does not have quotes or backticks around it
 
 ## Assign JSX to a variable
 
