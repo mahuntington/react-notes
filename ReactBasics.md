@@ -622,6 +622,17 @@ The previous section for updating state can often be overly complex when dealing
 
 1. Replace handleChangeName with a form submission handler that references the text input
 
+    ```HTML
+    <form onSubmit={this.handleFormSubmit}>
+        {this.state.username}
+        <input 
+                ref="username"
+                type="text"
+                placeholder="Your Name"/>
+        <input type="submit" value="Log In"/>}
+    </form>
+    ```
+
     ```JavaScript
     handleFormSubmit(event){
         event.preventDefault();
