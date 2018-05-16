@@ -43,7 +43,7 @@ mkdir dist
 We can now run:
 
 ```
-./node_modules/.bin/webpack js/index.js dist/bundle.js
+./node_modules/.bin/webpack js/index.js -o dist/bundle.js
 ```
 
 Create a basic HTML file (`index.html`):
@@ -167,7 +167,7 @@ Create `webpack.config.js` to simplify the terminal command
 module.exports = {
     entry: './js/index.js',
     output: {
-        filename: 'dist/bundle.js'
+        filename: 'bundle.js'
     }
 };
 ```
@@ -206,7 +206,7 @@ Modify the webpack config to use these:
 module.exports = {
     entry: './js/index.js',
     output: {
-        filename: 'dist/bundle.js'
+        filename: 'bundle.js'
     },
     module: {
         rules: [
@@ -234,7 +234,7 @@ class Foo {
 }
 ```
 
-The result in `dist/build.js` is the ES5 version:
+The result in `dist/build.js` is the ES5 version (may be minified):
 
 ```javascript
 var Foo = function () {
