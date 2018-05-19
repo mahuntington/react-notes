@@ -21,7 +21,9 @@
 1. Object literal extensions
 1. Destructuring
 1. swap (desconstucturing method)
-<!--  TODO: -->
+
+<!--  other options:
+
 1. symbols
 1. helper functions (trunc, entries, values, keys)
 1. unicode
@@ -29,6 +31,9 @@
 1. proxies
 1. promises
 1. generators
+1. async/await
+
+-->
 
 ## What is ES6   
 
@@ -64,6 +69,71 @@ Now! But it depends where. Node.js supports most/nearly all new things. [Chrome,
 
  ![babel repl](https://i.imgur.com/SKLMkIU.png)
 
+ You can also run babel from within the command line, but most often it's used a build tool like [webpack](https://webpack.js.org/).  First install:
+
+ ```
+ npm init
+ npm install babel-cli
+ npm install babel-preset-es2015
+ ```
+
+ Now in your `package.json` add this into `"scripts"`:
+
+ ```
+ "scripts": {
+   "build": "babel --presets es2015 test.js -o compiled.js"
+ },
+ ```
+
+Now create a `test.js` file:
+
+```
+touch test.js
+```
+
+In it, write some ES6:
+
+```JavaScript
+class Car {
+    run(){
+    }
+}
+```
+
+Now run `npm run build` and take a look at compiled.js:
+
+```JavaScript
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Car = function () {
+	function Car() {
+		_classCallCheck(this, Car);
+	}
+
+	_createClass(Car, [{
+		key: "run",
+		value: function run() {}
+	}]);
+
+	return Car;
+}();
+```
+
+That's a spicy meatball!
+
+If you want, you can adjust `package.json` to re-compile every time you make a change:
+
+```
+"scripts": {
+  "build": "babel --watch --presets es2015 test.js -o compiled.js"
+},
+```
+
+
 ## IIFE
 
 Normally, variable declarations, are "hoisted" up to the top of whatever function they are declared in (or global if no function exists).  This can lead to some weird moments:
@@ -93,7 +163,7 @@ IIFE - Immediately Invoked Function Expression - often used to create a block of
 ```JavaScript
 var a = 2;
 
-(function IIFE(){
+(function(){
     var a = 4;
     console.log ('Inside the IFFE, the value of a is', a ); //"Inside the IFFE, the value of a is 4"
 })();
@@ -213,54 +283,34 @@ console.log('ES6 square:',squareES6(6));
 
 ### Binding
 
-Here is an example of the arrow function binding this
+with callbacks, `this` can get redefined:
 
 ```JavaScript
-// Create constructor function, inputs name, has default friend values
-function Person ( name , friends = ["Charlie", "Dennis", "Ron", "Sweet Dee", "Frank"]){
+function Person(name){
     this.name = name;
-    this.friends = friends;
-
-    //Add four methods:
-
-    // The first, `secret Admirer`, `this.name` is undefined in the forEach function
-    this.secretAdmirer = function (){
-        this.friends.forEach(function ( f ){
-            console.log( this.name + " sends flowers to " + f );
-        });
-    }
-
-    //The second one is the way we got around the issue of `this` - which was to set the desired `this` to a variable called `that` or `self` or something similar:
-
-    this.giveOldSchoolLove = function (){
-        var self = this;
-        this.friends.forEach(function ( f ){
-            console.log( self.name + " likes " + f );
-        });
-    }
-
-    // we could also use .bind()
-    this.giveBindingAffection = function (){
-        this.friends.forEach(function ( f ){
-            console.log( this.name + " makes friendship bracelets for " + f )
-        }.bind(this));
-    }
-
-    //Finally, by using the arrow function, `this` is already bound:
-
-    this.giveNewSchoolLove = function (){
-        this.friends.forEach(f => console.log( this.name + " hearts " + f ));
+    this.logName = function(){
+        setTimeout(function(){
+            console.log(this.name);
+        },500)
     }
 }
+var me = new Person('Matt');
+me.logName();
+```
 
-//See examples
-k = new Person ( "Matt" );
-console.log( 'Secret Admirer:' );
-k.secretAdmirer();
-console.log( 'Show old school love:' );
-k.giveOldSchoolLove();
-console.log( 'Show new school love:' );
-k.giveNewSchoolLove();
+arrow functions fix this:
+
+```javascript
+function Person(name){
+    this.name = name;
+    this.logName = function(){
+        setTimeout(()=>{
+            console.log(this.name);
+        },500)
+    }
+}
+var me = new Person('Matt');
+me.logName();
 ```
 
 ## Support for Classes
@@ -331,25 +381,22 @@ for(let element of array){
 When creating a constructor and you wanted a default value, you previously had to write something like this:
 
 ```JavaScript
-function Beverage( type ){
-    this.type = type || "water";
+var multBy2 = function(value){
+    var defaultValue = (value)?value:0;
+    return defaultValue * 2
 }
-var breakfast = new Beverage();
-var breakfast2 = new Beverage( 'beer' );
-console.log ( breakfast );
-console.log ( breakfast2 );
+
+console.log(multBy2());
 ```
 
 Now you can do this in ES6
 
 ```JavaScript
-function Beverage ( type = 'sparkling water' ){
-  this.type = type;
+var multBy2 = function(value = 0){
+    return value * 2
 }
-var breakfast = new Beverage();
-var breakfast2 = new Beverage( 'rocket fuel' );
-console.log ( breakfast );
-console.log ( breakfast2 );
+
+console.log(multBy2());
 ```
 
 ## Array.isArray()
@@ -453,7 +500,7 @@ function yell(value){
     return value.toUpperCase();
 }
 
-console.log (`Hello ${yell(`${name}`)}!`);
+console.log (`Hello ${yell(name)}!`);
 ```
 
 Multiple lines used to suck:
@@ -601,19 +648,6 @@ console.log(a); // 3
 console.log(b); // 5
 ```
 
-Use this for default options arguments:
-
-```JavaScript
-function drawES2015Chart({size = 'big', cords = {x: 0, y: 0}, radius = 25} = {}) {
-    console.log(size, cords, radius);
-}
-
-drawES2015Chart({
-    cords: {x: 18, y: 30},
-    radius: 30
-});
-```
-
 You can pull values from a function argument that's an object:
 
 ```JavaScript
@@ -631,6 +665,19 @@ function userId({id}) {
 }
 
 console.log('userId: ' + userId(user)); // "userId: 42"
+```
+
+Use this for default options arguments:
+
+```JavaScript
+function drawES2015Chart({size = 'big', cords = {x: 0, y: 0}, radius = 25} = {}) {
+    console.log(size, cords, radius);
+}
+
+drawES2015Chart({
+    cords: {x: 18, y: 30},
+    radius: 30
+});
 ```
 
 If you have a property name which is not a valid variable name, you can reassign it:
@@ -675,47 +722,3 @@ var y = false;
 
 console.log(x,y);
 ```
-
-<details><summary>Note</summary>
-The reason this is special and new is because we have to
-remember that array values are normally passed by reference.
-It is also unusual to have an array that is not assigned to a variable
-
-```JavaScript
-// Pass by reference
-var a =  1;
-var b =  2;
-
-var originalArray = [a,b];
-console.log('is `a` equal to orginalArray[0]:', a === originalArray[0]);//true
-
-var newArray = originalArray;
-
-//will reverse BOTH arrays (because it is actually two references to the same array)
-newArray.reverse()
-
-console.log('This is newArray.reverse():', newArray)
-console.log('This is originalArray after newArray has been reversed', originalArray)
-console.log('is `a` equal to orginalArray[0]:', a === originalArray[0]);//false
-```
-
-To make a duplicate array that is not passed by reference, you would have to do something like:
-
-```JavaScript
-var a =  1;
-var b =  2;
-
-var anotherOriginalArray = [a,b];
-console.log('is `a` equal to anotherOrginalArray[0]:', a === anotherOriginalArray[0]);//true
-
-var trueNewArray = anotherOriginalArray.map(function(e){
-    return e;
-});
-
-console.log('this is trueNewArray', trueNewArray);
-trueNewArray.reverse();
-console.log('\nThis is trueNewArray.reverse():', trueNewArray);
-console.log('This is anotherOriginalArray after trueNewArray has been reversed', anotherOriginalArray);
-console.log('is `a` equal to anotherOriginalArray[0]:', anotherOriginalArray[0] === a); //true
-```
-</details>
