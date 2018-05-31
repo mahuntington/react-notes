@@ -25,7 +25,7 @@ node_modules
 Install basic packages:
 
 ```
-npm install babel-core babel-loader babel-preset-es2015 babel-preset-react react react-dom webpack webpack-dev-server --save-dev
+npm install babel-core babel-loader babel-preset-es2015 babel-preset-react react react-dom webpack webpack-cli webpack-dev-server --save-dev
 ```
 
 Create `webpack.config.js`
