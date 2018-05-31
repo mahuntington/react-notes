@@ -102,7 +102,7 @@ Export the `VisibleCommentsForm` component:
 export default VisibleCommentsForm;
 ```
 
-Refactor `handleSubmit` to this the `handleSubmit` component prop:
+Refactor `handleSubmit` to use the `handleSubmit` component prop:
 
 ```javascript
 handleSubmit(event){
