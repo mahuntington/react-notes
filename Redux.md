@@ -207,3 +207,9 @@ store.dispatch({
     }
 });
 ```
+
+Run the code:
+
+```
+node dist/bundle.js
+```
