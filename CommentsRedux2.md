@@ -65,7 +65,7 @@ In `js/components/commentslist.jsx`, export `VisibleCommentsList`:
 export default VisibleCommentsList;
 ```
 
-You can now remove the `constructor`/`componentDidMount` functions and change `this.state.comments.map` to `this.props.comments.map` show we back to using props instead of component state:
+You can now remove the `constructor`/`componentDidMount` functions and change `this.state.comments.map` to `this.props.comments.map`. We're back to using props instead of component state:
 
 ## Map a Dispatch ADD Action to a CommentsForm Component property
 
