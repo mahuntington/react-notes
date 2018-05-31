@@ -629,7 +629,7 @@ The previous section for updating state can often be overly complex when dealing
                 ref="username"
                 type="text"
                 placeholder="Your Name"/>
-        <input type="submit" value="Log In"/>}
+        <input type="submit" value="Log In"/>
     </form>
     ```
 
