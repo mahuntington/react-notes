@@ -65,12 +65,6 @@ let comments = function(state = [], action){
 
 ## Dispatch a SET action appropriately
 
-Import `js/store.js` into `js/components/commentslist.jsx`:
-
-```javascript
-import store from '../store.js';
-```
-
 Once our `js/components/commentslist.jsx` component mounts, make the approriate AJAX request and dispatch a SET action.
 
 ```javascript
