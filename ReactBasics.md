@@ -862,7 +862,7 @@ React doesn't have any built-in functionality to handle AJAX.  Either use jQuery
     ```JavaScript
     queryOMDB(event){
         event.preventDefault();
-        fetch('http://www.omdbapi.com/?apikey=53aa2cd6&t=' + this.refs.title.value).then(function(response){
+        fetch('http://www.omdbapi.com/?apikey=53aa2cd6&t=' + this.refs.title.value).then((response)=>{
             response.json().then((data) => {
                 console.log(this);
             });
@@ -875,7 +875,7 @@ React doesn't have any built-in functionality to handle AJAX.  Either use jQuery
     ```JavaScript
     queryOMDB(event){
         event.preventDefault();
-        fetch('http://www.omdbapi.com/?apikey=53aa2cd6&t=' + this.refs.title.value).then(function(response){
+        fetch('http://www.omdbapi.com/?apikey=53aa2cd6&t=' + this.refs.title.value).then((response)=>{
             response.json().then((data) => {
                 this.setState({foundMovie: data});
             });
