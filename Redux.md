@@ -144,6 +144,12 @@ store.dispatch({
 });
 ```
 
+Run the code:
+
+```
+node dist/bundle.js
+```
+
 ## Move the store to a separate file
 
 We want our data store in a separate file from our view logic
