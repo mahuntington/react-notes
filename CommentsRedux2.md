@@ -8,6 +8,12 @@ The last section works, but there are some optimizations we can make
 1. Map Redux State To The CommentsList Component
 1. Map a Dispatch ADD Action to a CommentsForm Component property
 
+## Set Up
+
+1. Copy the [comments_build_example](comments_build_example) directory from this repo.  It's what we built [here](Comments.md)
+1. Copy the `store.js` file we created for [this build](Redux.md)
+1. Install redux with `npm install redux --save-dev`
+
 ## Install `react-redux`
 
 ```
