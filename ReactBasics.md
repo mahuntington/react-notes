@@ -808,7 +808,7 @@ React doesn't have any built-in functionality to handle AJAX.  Either use jQuery
     ```JavaScript
     queryOMDB(event){
         event.preventDefault();
-        fetch('http://www.omdbapi.com/?t=' + this.refs.title.value).then(function(response){
+        fetch('http://www.omdbapi.com/?apikey=53aa2cd6&t=' + this.refs.title.value).then(function(response){
             response.json().then(function(data){
                 console.log(data);
             });
