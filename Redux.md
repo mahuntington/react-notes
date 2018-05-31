@@ -161,7 +161,7 @@ touch store.js
 In `store.js`:
 
 ```javascript
-import { createStore } from 'redux':
+import { createStore } from 'redux';
 
 const comments = function(state = [], action){
     switch(action.type){
