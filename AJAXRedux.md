@@ -1,5 +1,7 @@
 # Using AJAX With Redux
 
+Let's integrate a web API into our [last build](CommentsRedux2.md)
+
 ## Lesson Objectives
 
 1. Make an AJAX GET Request Using Fetch
