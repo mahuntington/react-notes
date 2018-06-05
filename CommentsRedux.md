@@ -73,7 +73,7 @@ In the handleSubmit function, dispatch an `ADD` action:
 ```javascript
 handleSubmit(event){
     event.preventDefault();
-    this.props.handleSubmit({
+    this.props.createComment({
         body: this.refs.body.value,
         author: this.refs.author.value
     });
@@ -142,7 +142,7 @@ class Comments extends React.Component {
 }
 ```
 
-`js/components/commentsform.jsx` no long needs to call `this.props.handleSubmit`:
+`js/components/commentsform.jsx` no long needs to call `this.props.createComment`:
 
 ```javascript
 handleSubmit(event){
