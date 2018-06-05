@@ -1,5 +1,7 @@
 # Integrate Comments Component With Redux
 
+This builds off of what was built by the end of [the comments build lesson](Comments.md)
+
 ## Lesson Objectives
 
 1. Install Redux
