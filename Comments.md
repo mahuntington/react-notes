@@ -77,7 +77,7 @@ class CommentsList extends React.Component {
 export default CommentsList;
 ```
 
-Import CommentsList into `js/components/comments.js`:
+Import CommentsList into `js/components/comments.jsx`:
 
 ```javascript
 import React from 'react';
