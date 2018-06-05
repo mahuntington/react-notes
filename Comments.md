@@ -120,7 +120,7 @@ class CommentsForm extends React.Component {
 export default CommentsForm;
 ```
 
-Import CommentsForm into `js/components/comments.js`:
+Import CommentsForm into `js/components/comments.jsx`:
 
 ```javascript
 import React from 'react';
