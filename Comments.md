@@ -238,7 +238,7 @@ In `js/components/comments.jsx` create a property on the CommentsForm element ca
 render(){
     return <section>
         <CommentsList comments={this.state.comments}></CommentsList>
-        <CommentsForm handleSubmit={this.addComment}></CommentsForm>
+        <CommentsForm createComment={this.addComment}></CommentsForm>
     </section>
 }
 ```
@@ -293,7 +293,7 @@ Now call the `handleSubmit` function that was passed into the CommentsForm compo
 ```javascript
 handleSubmit(event){
     event.preventDefault();
-    this.props.handleSubmit({
+    this.props.createComment({
         body: this.refs.body.value,
         author: this.refs.author.value            
     });
