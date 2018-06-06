@@ -67,6 +67,20 @@ export default VisibleCommentsList;
 
 You can now remove the `constructor`/`componentDidMount` functions and change `this.state.comments.map` to `this.props.comments.map`. We're back to using props instead of component state:
 
+```javascript
+class CommentsList extends React.Component {
+    render(){
+        return <ul>
+            {this.props.comments.map((comment, index) =>
+                <li key={index}>
+                    {comment.author} says: "{comment.body}"
+                </li>
+            )}
+        </ul>
+    }
+}
+```
+
 ## Map a Dispatch ADD Action to a CommentsForm Component property
 
 Import `connect` component from `react-redux` into `js/components/commentsForm.jsx`:
