@@ -214,6 +214,12 @@ store.dispatch({
 });
 ```
 
+Compile:
+
+```
+npm run build
+```
+
 Run the code:
 
 ```
