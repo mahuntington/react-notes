@@ -60,7 +60,7 @@ module.exports = {
 };
 ```
 
-Set up NPM to run Webpack:
+Set up NPM to run Webpack in `package.json`:
 
 ```javascript
 "scripts": {
