@@ -94,7 +94,7 @@ Now create a function that will map a dispatch to a property in `js/components/c
 ```javascript
 const mapDispatchToProps = function(dispatch){
     return {
-        handleSubmit: function(comment){
+        createComment: function(comment){
             dispatch({type:'ADD', comment: comment });
         }
     }
@@ -116,12 +116,12 @@ Export the `VisibleCommentsForm` component:
 export default VisibleCommentsForm;
 ```
 
-Refactor `handleSubmit` to use the `handleSubmit` component prop:
+Refactor `handleSubmit` to use the `createComment` component prop:
 
 ```javascript
 handleSubmit(event){
     event.preventDefault();
-    this.props.handleSubmit({
+    this.props.createComment({
         body: this.refs.body.value,
         author: this.refs.author.value
     });
