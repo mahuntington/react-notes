@@ -54,7 +54,7 @@ const mapStateToProps = function(state){
 In `js/components/commentslist.jsx` connect the mapper with the component:
 
 ```javascript
-const VisibleCommentsList = connect(
+const ConnectedComponent = connect(
     mapStateToProps
 )(CommentsList);
 ```
@@ -62,7 +62,7 @@ const VisibleCommentsList = connect(
 In `js/components/commentslist.jsx`, export `VisibleCommentsList`:
 
 ```javascript
-export default VisibleCommentsList;
+export default ConnectedComponent;
 ```
 
 You can now remove the `constructor`/`componentDidMount` functions and change `this.state.comments.map` to `this.props.comments.map`. We're back to using props instead of component state:
