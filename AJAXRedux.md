@@ -54,12 +54,12 @@ fetch('https://stupidcomments.herokuapp.com/comments').then((response)=>{
 
 ## Dispatch an ADD action appropriately
 
-In `js/components/commentsform.jsx` alter the `handleSubmit` property to make an AJAX POST request:
+In `js/components/commentsform.jsx` alter the `createComment` property to make an AJAX POST request:
 
 ```javascript
 const mapDispatchToProps = function(dispatch){
     return {
-        handleSubmit: function(comment){
+        createComment: function(comment){
             fetch(
                 'https://stupidcomments.herokuapp.com/comments',
                 {
