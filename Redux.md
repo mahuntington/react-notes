@@ -80,6 +80,7 @@ Test that import works:
 
 ```
 npm run build
+node dist/bundle.js
 ```
 
 ## Create a reducer
