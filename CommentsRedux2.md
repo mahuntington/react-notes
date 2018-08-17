@@ -59,7 +59,7 @@ const ConnectedComponent = connect(
 )(CommentsList);
 ```
 
-In `js/components/commentslist.jsx`, export `VisibleCommentsList`:
+In `js/components/commentslist.jsx`, export `ConnectedComponent`:
 
 ```javascript
 export default ConnectedComponent;
