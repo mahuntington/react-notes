@@ -21,8 +21,6 @@ npm init
 npm install webpack --save-dev
 ```
 
-If you're asked, install `webpack-cli` as well.
-
 Create a test file:
 
 ```
@@ -169,7 +167,7 @@ Create `webpack.config.js` to simplify the terminal command
 module.exports = {
     entry: './js/index.js',
     output: {
-        filename: 'dist/bundle.js'
+        filename: 'bundle.js'
     }
 };
 ```
@@ -208,7 +206,7 @@ Modify the webpack config to use these:
 module.exports = {
     entry: './js/index.js',
     output: {
-        filename: 'dist/bundle.js'
+        filename: 'bundle.js'
     },
     module: {
         rules: [
@@ -236,7 +234,7 @@ class Foo {
 }
 ```
 
-The result in `dist/build.js` is the ES5 version:
+The result in `dist/build.js` is the ES5 version (may be minified):
 
 ```javascript
 var Foo = function () {
@@ -336,4 +334,31 @@ and it will open up your browser automatically.  Change a file, and see it reloa
 
 ```
 rm -r dist
+```
+
+Change your script tag to be
+
+```html
+<script src="main.js" charset="utf-8"></script>
+```
+
+And take out the `output` property in webpack.config.js
+
+```javascript
+module.exports = {
+    entry: './js/index.js',
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/, //for all files that end with js/jsx
+                use: {
+                    loader: 'babel-loader', //use the babel loader to load:
+                    options: {
+                        presets: ["es2015", "react"] //the es2015 compiler
+                    }
+                }
+            }
+        ]
+    }
+};
 ```
