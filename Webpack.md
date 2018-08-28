@@ -46,6 +46,8 @@ We can now run:
 ./node_modules/.bin/webpack js/index.js -o dist/bundle.js
 ```
 
+If given the option, tell `npm` to install `webpack-cli`
+
 Create a basic HTML file (`index.html`):
 
 ```html
