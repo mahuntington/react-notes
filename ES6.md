@@ -17,11 +17,14 @@
 1. Array.isArray()
 1. argument object
 1. spread and rest operators
+1. Trailing commas
 1. Template Literals
 1. Object literal extensions
 1. Destructuring
 1. swap (desconstucturing method)
-
+1. Merge objects
+1. Array functions
+1. Asynchronous programming
 <!--  other options:
 
 1. symbols
@@ -65,7 +68,7 @@ An example Polyfill:
 
 ## babel/transpiling
 
-Now! But it depends where. Node.js supports most/nearly all new things. [Chrome, Firefox, Edge, and Safari have been keeping up well](http://caniuse.com/#search=es6). But new features are being added and tested. To be sure that code will run across many platforms (never forget the people who still use IE8), many people have come to rely on transpilers/compilers. Transpilers/Compilers take 'dialects' of standard code (incuding ES6, coffeescript, typescript and more) and convert the code for you. A popular one for ES6 is [Babel](https://babeljs.io/), they have both repl (Read, Evaluate, Print, Loop) and an npm module/gem.
+Node.js supports most/nearly all new things. [Chrome, Firefox, Edge, and Safari have been keeping up well](http://caniuse.com/#search=es6). But new features are being added and tested. To be sure that code will run across many platforms (never forget the people who still use IE8), many people have come to rely on transpilers/compilers. Transpilers/Compilers take 'dialects' of standard code (incuding ES6, coffeescript, typescript and more) and convert the code for you. A popular one for ES6 is [Babel](https://babeljs.io/), they have both repl (Read, Evaluate, Print, Loop) and an npm module/gem.
 
  ![babel repl](https://i.imgur.com/SKLMkIU.png)
 
@@ -188,14 +191,14 @@ for(var i=0; i<5; i++){
 A new way to get block level scoping is with the keyword let, and the use of `{}` as in any `{}`, not just tied to a function! Note: `let` is NOT meant to completely replace `var`!
 
 ```JavaScript
-var a = 2
+let a = 2
 
 {
     let a = 4
-    console.log( 'the value of b inside the `{}` is', a); //"block level scope"
+    console.log( 'the value of a inside the `{}` is', a); //"block level scope"
 }
 
-console.log ('the value of b outside of the `{}` is', a) //"global scope"
+console.log ('the value of a outside of the `{}` is', a) //"global scope"
 ```
 
 And now the loop with setTimeout:
@@ -317,20 +320,23 @@ me.logName();
 
 ```JavaScript
 class Cat {
+    static getTypes(){
+        return ['large', 'small'];
+    }
     constructor(name) {
         this.name = name;
     }
     makesNoises() {
-        return (this.name + 'meows');
+        return this.name + ' meows';
     }
     purrs(){
-        return (this.name + 'purrs');
+        return this.name + ' purrs';
     }
 }
 
 class Lion extends Cat {
     makesNoises() {
-        return (this.name + 'roars!');
+        return this.name + ' roars!';
     }
     eatHuman(){
         return 'yum';
@@ -345,6 +351,31 @@ var myLion = new Lion("Simba");
 console.log(myLion.makesNoises());
 console.log(myLion.purrs());
 console.log(myLion.eatHuman());
+
+console.log(Cat.getTypes());
+```
+
+This makes inheritance much easier than how it used to be:
+
+```javascript
+var Person = function(){
+    this.greet = function(){
+        console.log('oh hai!');
+    }
+}
+
+var SuperHero = function(){
+    Person.call(this);
+    this.fly = function(){
+        console.log('up up and away!');
+    }
+}
+SuperHero.prototype = Object.create(Person.prototype);
+SuperHero.prototype.constructor = SuperHero;
+
+var superman = new SuperHero()
+superman.fly();
+superman.greet();
 ```
 
 ## for...of
@@ -378,7 +409,7 @@ for(let element of array){
 
 ## Default values
 
-When creating a constructor and you wanted a default value, you previously had to write something like this:
+When creating a function and you wanted a default value, you previously had to write something like this:
 
 ```JavaScript
 var multBy2 = function(value){
@@ -466,11 +497,52 @@ The rest operator gathers many values into an array.  It's basically the opposit
 
 ```JavaScript
 function returnOnlyNums(...arrayParam){
-    var nums = arrayParam.filter(arg => typeof arg === 'number');
+    var nums = arrayParam.filter(function(currentElement){
+        return typeof currentElement === 'number'
+    })
     return nums;
 }
 
 console.log( returnOnlyNums(44, false, 'pizza', 45, {season: "winter"}, [1,2,3,4,5,], 2, 9) ); // [ 44, 45, 2, 9 ]
+```
+
+## Trailing commas
+
+You can add trailing commas to make copy/paste easier later on:
+
+```javascript
+var arr = [
+  1,
+  2,
+  3, //the comma here will not cause issues
+];
+
+console.log(arr);
+```
+
+If you have multiple commas, it will create holes in the array:
+
+```javascript
+var arr = [
+  1,
+  2,
+  3,,,,
+];
+
+console.log(arr);
+console.log(arr.length); //logs 6
+```
+
+Trailing commas are okay in objects too:
+
+```javascript
+var object = {
+  foo: "bar",
+  baz: "qwerty",
+  age: 42,
+};
+
+console.log(object);
 ```
 
 ## Template Literals (String Interpolation)
@@ -621,9 +693,7 @@ console.log(b); // 7
 Pull variables out of an object
 
 ```JavaScript
-var p, q;
-
-{p, q} = {p: 42, q: true};
+var {p, q} = {p: 42, q: true};
 
 console.log(p); // 42
 console.log(q); // true
@@ -670,7 +740,7 @@ console.log('userId: ' + userId(user)); // "userId: 42"
 Use this for default options arguments:
 
 ```JavaScript
-function drawES2015Chart({size = 'big', cords = {x: 0, y: 0}, radius = 25} = {}) {
+function drawES2015Chart({size = 'big', cords = {x: 0, y: 0}, radius = 25}) {
     console.log(size, cords, radius);
 }
 
@@ -721,4 +791,106 @@ var y = false;
 [x,y] = [y,x];
 
 console.log(x,y);
+```
+
+## Merge objects
+
+You can use `Object.assign()` to merge properties of two or more objects:
+
+```javascript
+var a = {
+    foo:'bar'
+}
+
+var b = {
+    awesome:true
+}
+
+Object.assign(a, b);
+
+console.log(a);
+```
+
+This is extremely useful when you need to create a brand new object that is a clone of another one with some minor changes (happens all the time with Redux):
+
+```javascript
+var bob = {
+    name:'Bob',
+    age: 42
+}
+
+var sally = Object.assign({}, bob, {name:'Sally'})
+
+console.log(sally);
+```
+
+## Array functions
+
+There are a bunch of cool new array helper functions:
+
+```javascript
+var nums = [1,3,5,7,8];
+var largeNums = nums.filter(function(currentNum){
+    return currentNum > 5
+});
+console.log(largeNums);
+
+var sum = nums.reduce(function(accumulatedValue, currentNum){
+    return accumulatedValue + currentNum;
+});
+console.log(sum);
+
+var doubledValues = nums.map(function(currentNum){
+    return currentNum * 2;
+})
+console.log(doubledValues);
+
+var found = nums.find(function(currentNum) {
+  return currentNum > 5;
+});
+console.log(found);
+
+var found = nums.findIndex(function(currentNum) {
+  return currentNum > 5;
+});
+console.log(found);
+
+var doesFiveExist = nums.includes(5);
+console.log(doesFiveExist);
+
+var doubleArray = nums.concat(nums);
+console.log(doubleArray);
+
+var section = nums.slice(2,4)
+console.log(section);
+```
+
+## Asynchronous programming
+
+Asynchronous programming used to be filled with nested callbacks and promises:
+
+```javascript
+fetch('http://www.omdbapi.com/?apikey=53aa2cd6&s=Star').then(function(response){
+    response.json().then(function(searchData){
+        fetch('http://www.omdbapi.com/?apikey=53aa2cd6&t='+searchData.Search[0].Title).then(function(response){
+            //NOTE: this function is a closure, so we could still reference searchData
+            response.json().then(function(titleData){
+                console.log(titleData);
+            });
+        });
+    })
+})
+```
+
+But now using Aync/Await, we can make our code much easier to read:
+
+```javascript
+var getData = async function(){
+    var searchResponse = await fetch('http://www.omdbapi.com/?apikey=53aa2cd6&s=Star');
+    var searchData = await searchResponse.json();
+    var titleResponse = await fetch('http://www.omdbapi.com/?apikey=53aa2cd6&t=' + searchData.Search[0].Title);
+    var titleData = await titleResponse.json();
+    console.log(titleData);
+}
+getData();
 ```
