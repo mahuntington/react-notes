@@ -330,7 +330,7 @@ Now you can run
 npm run build
 ```
 
-and it will open up your browser automatically.  Change a file, and see it reload.
+and it will open up your browser automatically.
 
 **NOTE** Webpack doesn't actually write the transpiled files to disk.  Instead it serves them from memory.  You can delete the `dist` directory
 
